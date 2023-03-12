@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Bookings</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a class="nav-link" href="/hotel">Home</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/hotel/new_booking/">Book</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>Room number {{ booking.room.number }}</h1>
+    <li>Category    : {{ booking.room.category }}</li>
+    <li>Booked by   : {{ booking.user }}</li>
+    <li>Check in    : {{ booking.checkin }}</li>
+    <li>Check out   : {{ booking.checkout }}</li>
+    <a href="{% url 'hotel:delete_booking' booking.pk %}" class="btn btn-primary">Remove</a>
+</html>
