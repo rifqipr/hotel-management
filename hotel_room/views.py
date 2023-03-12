@@ -1,7 +1,8 @@
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.shortcuts import redirect, HttpResponse
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, FormView, DeleteView
+
 from .forms import *
 from .models import *
 
@@ -38,7 +39,7 @@ class BookingView(FormView):
 
         chosen_room = valid_rooms[0]
         booking = Booking.objects.create(
-            user = self.request.user,
+            user = data["name"],
             room = chosen_room,
             checkin = data["checkin"],
             checkout = data["checkout"]

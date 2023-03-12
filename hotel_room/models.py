@@ -16,7 +16,7 @@ class Room(models.Model):
         return f"Room number {self.number}, category {self.category} for {self.capacity}"
     
 class Booking(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.CharField(max_length=20)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     checkin = models.DateTimeField()
     checkout = models.DateTimeField()
