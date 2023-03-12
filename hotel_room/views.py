@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, DetailView, FormView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import *
 
@@ -20,7 +19,7 @@ class BookingDelete(DeleteView):
     template_name = "hotel_room/delete_booking.html"
     success_url = reverse_lazy("hotel:booking_list")
 
-class BookingView(LoginRequiredMixin, FormView):
+class BookingView(FormView):
     form_class = BookingForm
     template_name = "booking_form.html"
     
