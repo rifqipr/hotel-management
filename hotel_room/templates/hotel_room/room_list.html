@@ -24,8 +24,12 @@
         </ul>
     </nav>
 
-    {%for room in room_list%}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+    
+    {% for room in room_list %}
     <li>{{room}}</li>
-    {%endfor%}
+    {% endfor %}
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
-from django.shortcuts import render, HttpResponse
+from django.contrib import messages
+from django.shortcuts import redirect, HttpResponse
 from django.views.generic import ListView, DetailView, FormView, DeleteView
 from .forms import *
 from .models import *
@@ -32,7 +33,8 @@ class BookingView(FormView):
                 valid_rooms.append(room)
         
         if len(valid_rooms) == 0:
-            return HttpResponse("There are no available room with category", data["category"])
+            messages.error(self.request, f"Booking failed")
+            return redirect("/hotel/")
 
         chosen_room = valid_rooms[0]
         booking = Booking.objects.create(
@@ -42,7 +44,8 @@ class BookingView(FormView):
             checkout = data["checkout"]
         )
         booking.save()
-        return HttpResponse(booking)
+        messages.success(self.request, f"Booked a {chosen_room.category} room number {chosen_room.number}")
+        return redirect("/hotel/")
 
 def check_availability(room, checkin, checkout):
     available = []
